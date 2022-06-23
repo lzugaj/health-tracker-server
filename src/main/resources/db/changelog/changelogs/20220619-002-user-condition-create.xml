@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="20220619-002-1" author="lzugaj" >
+        <createTable tableName="user_condition">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+
+            <column name="is_selected" type="BOOLEAN">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="initially_activated_at" type="DATETIME">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="lastly_activated_at" type="DATETIME">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lastly_deactivated_at" type="DATETIME">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="user_id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="condition_id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20220619-002-2" author="lzugaj">
+        <addForeignKeyConstraint
+                constraintName="fk_user_condition"
+                baseTableName="user_condition"
+                baseColumnNames="user_id"
+                referencedTableName="user"
+                referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="20220619-002-3" author="lzugaj">
+        <addForeignKeyConstraint
+                constraintName="fk_condition_user"
+                baseTableName="user_condition"
+                baseColumnNames="condition_id"
+                referencedTableName="condition"
+                referencedColumnNames="id"
+        />
+    </changeSet>
+
+</databaseChangeLog>
