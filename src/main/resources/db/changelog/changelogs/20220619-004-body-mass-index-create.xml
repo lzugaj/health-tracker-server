@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="20220619-006-1" author="lzugaj" >
+        <createTable tableName="body_mass_index">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+
+            <column name="height" type="DECIMAL(10,2)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="weight" type="DECIMAL(10,2)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="bmi_value" type="DECIMAL(10,2)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="age" type="INT">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="gender" type="VARCHAR(10)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="user_id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="body_mass_index_range_info_id" type="UUID">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20220619-006-2" author="lzugaj">
+        <addForeignKeyConstraint
+                constraintName="fk_user_body_mass_index"
+                baseTableName="body_mass_index"
+                baseColumnNames="user_id"
+                referencedTableName="user"
+                referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="20220619-006-3" author="lzugaj">
+        <addForeignKeyConstraint
+                constraintName="fk_body_mass_index_range_info"
+                baseTableName="body_mass_index"
+                baseColumnNames="body_mass_index_range_info_id"
+                referencedTableName="body_mass_index_range_info"
+                referencedColumnNames="id"
+        />
+    </changeSet>
+
+</databaseChangeLog>

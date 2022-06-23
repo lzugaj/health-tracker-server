@@ -1,0 +1,14 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /api/v1/health-tracker
+    application-display-name: 'Health Tracker Rest API'
+spring:
+  application:
+    name: health-tracker-server
+  jpa:
+    open-in-view: true
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
