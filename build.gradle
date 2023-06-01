@@ -6,6 +6,8 @@ buildscript {
 
         flywayVersion = "9.16.1"
 
+        zalandoProblemVersion = "0.29.1"
+
         junitJupiterVersion = "5.9.2"
         testcontainersVersion = "1.17.6"
     }
@@ -45,12 +47,18 @@ test {
 }
 
 dependencies {
+    // Spring
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-data-rest"
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springframework:spring-webflux:$springWebfluxVerion"
 
+    // Flyway
     implementation "org.flywaydb:flyway-core:$flywayVersion"
+
+    // Zalando
+    implementation "org.zalando:problem-spring-web-starter:$zalandoProblemVersion"
+    implementation "org.zalando:problem-spring-web:$zalandoProblemVersion"
 
     compileOnly "org.projectlombok:lombok"
 

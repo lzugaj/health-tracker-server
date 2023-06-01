@@ -1,11 +1,11 @@
-CREATE SEQUENCE seq_body_mass_index START 1 INCREMENT 1;
+create sequence seq_body_mass_index start 1 increment 1;
 
-CREATE TABLE IF NOT EXISTS "body_mass_index" (
-    id BIGINT NOT NULL,
-    height TEXT NOT NULL,
-    weight TEXT NOT NULL,
-    value TEXT NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    modified_at TIMESTAMP NOT NULL,
-    PRIMARY KEY (id)
+create table if not exists "body_mass_index" (
+    id bigint not null,
+    height text not null,
+    weight text not null,
+    value text not null,
+    created_at timestamp not null,
+    modified_at timestamp not null,
+    primary key (id)
 );
