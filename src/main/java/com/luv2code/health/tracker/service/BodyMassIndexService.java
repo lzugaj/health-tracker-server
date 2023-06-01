@@ -1,0 +1,48 @@
+package com.luv2code.health.tracker.service;
+
+import com.luv2code.health.tracker.domain.BodyMassIndex;
+import com.luv2code.health.tracker.repository.BodyMassIndexRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class BodyMassIndexService {
+
+    private final BodyMassIndexRepository bodyMassIndexRepository;
+
+    public BodyMassIndexService(BodyMassIndexRepository bodyMassIndexRepository) {
+        this.bodyMassIndexRepository = bodyMassIndexRepository;
+    }
+
+    @Transactional
+    public void save(BodyMassIndex bodyMassIndex) {
+        bodyMassIndexRepository.save(bodyMassIndex);
+    }
+
+    public BodyMassIndex findById(Long id) {
+        return bodyMassIndexRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format("Cannot find searched Body Mass Index. [id=%d]", id)));
+    }
+
+    public List<BodyMassIndex> findAll() {
+        return bodyMassIndexRepository.findAll().stream()
+                .sorted(Comparator.comparing(BodyMassIndex::getCreatedAt))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void update(BodyMassIndex bodyMassIndex) {
+        bodyMassIndexRepository.save(bodyMassIndex);
+    }
+
+    @Transactional
+    public void delete(BodyMassIndex bodyMassIndex) {
+        bodyMassIndexRepository.delete(bodyMassIndex);
+    }
+}
