@@ -8,10 +8,11 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+import static lombok.AccessLevel.*;
+
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
+@NoArgsConstructor(access = PROTECTED)
 @Table(name = "body_mass_index")
 public class BodyMassIndex {
 
@@ -47,7 +48,7 @@ public class BodyMassIndex {
     @Column(name = "modified_at", nullable = false)
     private LocalDateTime modifiedAt;
 
-    @Builder
+    @Builder(toBuilder = true)
     public BodyMassIndex(Double height, Double weight) {
         checkDomain(height, weight);
 
@@ -58,7 +59,7 @@ public class BodyMassIndex {
         this.modifiedAt = LocalDateTime.now();
     }
 
-    public void update(BodyMassIndexDTO dto) {
+    public void update(BodyMassIndex dto) {
         checkDomain(dto.getHeight(), dto.getWeight());
 
         this.height = dto.getHeight();

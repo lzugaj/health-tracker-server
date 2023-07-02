@@ -3,6 +3,7 @@ package com.luv2code.health.tracker.service;
 import com.luv2code.health.tracker.domain.BodyMassIndex;
 import com.luv2code.health.tracker.repository.BodyMassIndexRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,13 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class BodyMassIndexService {
 
     private final BodyMassIndexRepository bodyMassIndexRepository;
-
-    public BodyMassIndexService(BodyMassIndexRepository bodyMassIndexRepository) {
-        this.bodyMassIndexRepository = bodyMassIndexRepository;
-    }
 
     @Transactional
     public void save(BodyMassIndex bodyMassIndex) {
@@ -30,6 +28,7 @@ public class BodyMassIndexService {
                         String.format("Cannot find searched Body Mass Index. [id=%d]", id)));
     }
 
+    @Transactional(readOnly = true)
     public List<BodyMassIndex> findAll() {
         return bodyMassIndexRepository.findAll().stream()
                 .sorted(Comparator.comparing(BodyMassIndex::getCreatedAt))
@@ -37,12 +36,15 @@ public class BodyMassIndexService {
     }
 
     @Transactional
-    public void update(BodyMassIndex bodyMassIndex) {
-        bodyMassIndexRepository.save(bodyMassIndex);
+    public void update(Long id, BodyMassIndex bodyMassIndex) {
+        bodyMassIndexRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format("Cannot find searched Body Mass Index. [id=%d]", id)))
+                .update(bodyMassIndex);
     }
 
     @Transactional
-    public void delete(BodyMassIndex bodyMassIndex) {
-        bodyMassIndexRepository.delete(bodyMassIndex);
+    public void delete(Long id) {
+        bodyMassIndexRepository.deleteById(id);
     }
 }

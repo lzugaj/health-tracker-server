@@ -53,6 +53,8 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springframework:spring-webflux:$springWebfluxVerion"
 
+    implementation "org.springframework.boot:spring-boot-starter-aop"
+
     // Flyway
     implementation "org.flywaydb:flyway-core:$flywayVersion"
 
