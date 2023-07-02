@@ -6,8 +6,6 @@ import com.luv2code.health.tracker.rest.mapper.BodyMassIndexMapper;
 import com.luv2code.health.tracker.service.BodyMassIndexService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

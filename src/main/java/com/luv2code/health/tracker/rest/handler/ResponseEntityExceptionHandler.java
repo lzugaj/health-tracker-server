@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static java.time.LocalDateTime.now;
+import static org.zalando.problem.Status.BAD_REQUEST;
+import static org.zalando.problem.Status.NOT_FOUND;
 
 @RestControllerAdvice
 public class ResponseEntityExceptionHandler implements ProblemHandling {
@@ -24,26 +26,22 @@ public class ResponseEntityExceptionHandler implements ProblemHandling {
 
     @ExceptionHandler(value = EntityNotFoundException.class)
     public ResponseEntity<Problem> handleEntityNotFoundException(RuntimeException exception, HttpServletRequest httpServletRequest) {
-        StatusType notFoundRequest = Status.NOT_FOUND;
-        return createResponseMessage(notFoundRequest, exception, httpServletRequest);
+        return createResponseMessage(NOT_FOUND, exception, httpServletRequest);
     }
 
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<Problem> handleRuntimeException(RuntimeException exception, HttpServletRequest httpServletRequest) {
-        StatusType badRequest = Status.BAD_REQUEST;
-        return createResponseMessage(badRequest, exception, httpServletRequest);
+        return createResponseMessage(BAD_REQUEST, exception, httpServletRequest);
     }
 
     @ExceptionHandler(value = IllegalArgumentException.class)
     public ResponseEntity<Problem> handleIllegalArgumentException(IllegalArgumentException exception, HttpServletRequest httpServletRequest) {
-        StatusType notFoundRequest = Status.BAD_REQUEST;
-        return createResponseMessage(notFoundRequest, exception, httpServletRequest);
+        return createResponseMessage(BAD_REQUEST, exception, httpServletRequest);
     }
 
     @ExceptionHandler(value = LowerThanOrEqualsZeroException.class)
     public ResponseEntity<Problem> handleLowerThanOrEqualsZeroException(LowerThanOrEqualsZeroException exception, HttpServletRequest httpServletRequest) {
-        StatusType badRequest = Status.BAD_REQUEST;
-        return createResponseMessage(badRequest, exception, httpServletRequest);
+        return createResponseMessage(BAD_REQUEST, exception, httpServletRequest);
     }
 
     public ResponseEntity<Problem> createResponseMessage(StatusType statusType, Exception exception, HttpServletRequest httpServletRequest) {
