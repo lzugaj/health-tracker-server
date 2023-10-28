@@ -1,16 +1,20 @@
 spring:
-    jpa:
-        properties:
-            hibernate:
-                show_sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5687/health-tracker
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
 logging:
-    level:
-        org:
-            springframework:
-                web: debug
-
-POSTGRES_HOST: localhost
-POSTGRES_PORT: 5687
-POSTGRES_DB: health-tracker
-POSTGRES_USER: postgres
-POSTGRES_PASSWORD: password
+  level:
+    org:
+      springframework:
+        web: debug
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

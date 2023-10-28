@@ -3,21 +3,14 @@ package com.luv2code.health.tracker.rest.dto;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class BodyMassIndexDTO {
-
-    private Long id;
-
-    @NotNull
-    private Double height;
-
-    @NotNull
-    private Double weight;
-
-    private Double value;
+public record BodyMassIndexDTO (
+        Long id,
+        @NotNull Double height,
+        @NotNull Double weight,
+        @NotNull Integer age,
+        @NotNull String gender,
+        Double value
+) {
 
 }

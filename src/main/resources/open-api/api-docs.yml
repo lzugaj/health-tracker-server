@@ -1,0 +1,2339 @@
+openapi: 3.0.1
+info:
+  title: Health Tracker API
+  description: Health Tracker is a RESTfull service that allows users to tracker own
+    health parameters.
+  termsOfService: terms
+  contact:
+    name: Luka Zugaj
+    email: luka.zugaj7@gmail.com
+  license:
+    name: GNU
+    url: https://github.com/thombergs/code-examples/blob/master/LICENSE
+  version: "1.0"
+servers:
+- url: http://localhost:8080
+tags:
+- name: Login
+  description: Login API
+- name: Hypertension
+  description: Hypertension API
+- name: Body Mass Index
+  description: Body mass index API
+- name: Refresh Token
+  description: Refresh Token API
+paths:
+  /bodyMassIndexes:
+    get:
+      tags:
+      - body-mass-index-entity-controller
+      description: get-bodymassindex
+      operationId: getCollectionResource-bodymassindex-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelBodyMassIndex'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelBodyMassIndex'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - body-mass-index-entity-controller
+      description: create-bodymassindex
+      operationId: postCollectionResource-bodymassindex-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyMassIndexRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBodyMassIndex'
+  /bodyMassIndexes/{id}:
+    get:
+      tags:
+      - body-mass-index-entity-controller
+      description: get-bodymassindex
+      operationId: getItemResource-bodymassindex-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBodyMassIndex'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - body-mass-index-entity-controller
+      description: update-bodymassindex
+      operationId: putItemResource-bodymassindex-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyMassIndexRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBodyMassIndex'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBodyMassIndex'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - body-mass-index-entity-controller
+      description: delete-bodymassindex
+      operationId: deleteItemResource-bodymassindex-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - body-mass-index-entity-controller
+      description: patch-bodymassindex
+      operationId: patchItemResource-bodymassindex-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyMassIndexRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelBodyMassIndex'
+        "204":
+          description: No Content
+  /hypertensions:
+    get:
+      tags:
+      - hypertension-entity-controller
+      description: get-hypertension
+      operationId: getCollectionResource-hypertension-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelHypertension'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelHypertension'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - hypertension-entity-controller
+      description: create-hypertension
+      operationId: postCollectionResource-hypertension-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HypertensionRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelHypertension'
+  /hypertensions/{id}:
+    get:
+      tags:
+      - hypertension-entity-controller
+      description: get-hypertension
+      operationId: getItemResource-hypertension-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelHypertension'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - hypertension-entity-controller
+      description: update-hypertension
+      operationId: putItemResource-hypertension-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HypertensionRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelHypertension'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelHypertension'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - hypertension-entity-controller
+      description: delete-hypertension
+      operationId: deleteItemResource-hypertension-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - hypertension-entity-controller
+      description: patch-hypertension
+      operationId: patchItemResource-hypertension-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HypertensionRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelHypertension'
+        "204":
+          description: No Content
+  /profile:
+    get:
+      tags:
+      - profile-controller
+      operationId: listAllFormsOfMetadata_1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/RepresentationModelObject'
+  /profile/bodyMassIndexes:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_1
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/hypertensions:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_2
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/refreshTokens:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_3
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /profile/users:
+    get:
+      tags:
+      - profile-controller
+      operationId: descriptor_1_1_4
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+            application/alps+json:
+              schema:
+                type: string
+            application/schema+json:
+              schema:
+                $ref: '#/components/schemas/JsonSchema'
+  /refreshTokens:
+    get:
+      tags:
+      - refresh-token-entity-controller
+      description: get-refreshtoken
+      operationId: getCollectionResource-refreshtoken-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelRefreshToken'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelRefreshToken'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - refresh-token-entity-controller
+      description: create-refreshtoken
+      operationId: postCollectionResource-refreshtoken-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelRefreshToken'
+  /refreshTokens/search/findByToken:
+    get:
+      tags:
+      - refresh-token-search-controller
+      operationId: executeSearch-refreshtoken-get
+      parameters:
+      - name: token
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelRefreshToken'
+        "404":
+          description: Not Found
+  /refreshTokens/search/findByUser:
+    get:
+      tags:
+      - refresh-token-search-controller
+      operationId: executeSearch-refreshtoken-get_1
+      parameters:
+      - name: user
+        in: query
+        schema:
+          $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelRefreshToken'
+        "404":
+          description: Not Found
+  /refreshTokens/{id}:
+    get:
+      tags:
+      - refresh-token-entity-controller
+      description: get-refreshtoken
+      operationId: getItemResource-refreshtoken-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelRefreshToken'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - refresh-token-entity-controller
+      description: update-refreshtoken
+      operationId: putItemResource-refreshtoken-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelRefreshToken'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelRefreshToken'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - refresh-token-entity-controller
+      description: delete-refreshtoken
+      operationId: deleteItemResource-refreshtoken-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - refresh-token-entity-controller
+      description: patch-refreshtoken
+      operationId: patchItemResource-refreshtoken-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelRefreshToken'
+        "204":
+          description: No Content
+  /refreshTokens/{id}/user:
+    get:
+      tags:
+      - refresh-token-property-reference-controller
+      description: get-user-by-refreshtoken-Id
+      operationId: followPropertyReference-refreshtoken-get_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - refresh-token-property-reference-controller
+      description: update-user-by-refreshtoken-Id
+      operationId: createPropertyReference-refreshtoken-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - refresh-token-property-reference-controller
+      description: delete-user-by-refreshtoken-Id
+      operationId: deletePropertyReference-refreshtoken-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - refresh-token-property-reference-controller
+      description: patch-user-by-refreshtoken-Id
+      operationId: createPropertyReference-refreshtoken-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+  /refreshTokens/{id}/user/{propertyId}:
+    get:
+      tags:
+      - refresh-token-property-reference-controller
+      description: get-user-by-refreshtoken-Id
+      operationId: followPropertyReference-refreshtoken-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - refresh-token-property-reference-controller
+      description: delete-user-by-refreshtoken-Id
+      operationId: deletePropertyReferenceId-refreshtoken-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /users:
+    get:
+      tags:
+      - user-entity-controller
+      description: get-user
+      operationId: getCollectionResource-user-get_1
+      parameters:
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelUser'
+            application/x-spring-data-compact+json:
+              schema:
+                $ref: '#/components/schemas/PagedModelEntityModelUser'
+            text/uri-list:
+              schema:
+                type: string
+    post:
+      tags:
+      - user-entity-controller
+      description: create-user
+      operationId: postCollectionResource-user-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequestBody'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+  /users/search/findByEmail:
+    get:
+      tags:
+      - user-search-controller
+      operationId: executeSearch-user-get
+      parameters:
+      - name: email
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "404":
+          description: Not Found
+  /users/{id}:
+    get:
+      tags:
+      - user-entity-controller
+      description: get-user
+      operationId: getItemResource-user-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - user-entity-controller
+      description: update-user
+      operationId: putItemResource-user-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - user-entity-controller
+      description: delete-user
+      operationId: deleteItemResource-user-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - user-entity-controller
+      description: patch-user
+      operationId: patchItemResource-user-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequestBody'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/EntityModelUser'
+        "204":
+          description: No Content
+  /users/{id}/bodyMassIndices:
+    get:
+      tags:
+      - user-property-reference-controller
+      description: get-bodymassindex-by-user-Id
+      operationId: followPropertyReference-user-get_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBodyMassIndex'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - user-property-reference-controller
+      description: update-bodymassindex-by-user-Id
+      operationId: createPropertyReference-user-put
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBodyMassIndex'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBodyMassIndex'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - user-property-reference-controller
+      description: delete-bodymassindex-by-user-Id
+      operationId: deletePropertyReference-user-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - user-property-reference-controller
+      description: patch-bodymassindex-by-user-Id
+      operationId: createPropertyReference-user-patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBodyMassIndex'
+        "204":
+          description: No Content
+  /users/{id}/bodyMassIndices/{propertyId}:
+    get:
+      tags:
+      - user-property-reference-controller
+      description: get-bodymassindex-by-user-Id
+      operationId: followPropertyReference-user-get
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelBodyMassIndex'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - user-property-reference-controller
+      description: delete-bodymassindex-by-user-Id
+      operationId: deletePropertyReferenceId-user-delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /users/{id}/hypertensions:
+    get:
+      tags:
+      - user-property-reference-controller
+      description: get-hypertension-by-user-Id
+      operationId: followPropertyReference-user-get_2_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelHypertension'
+            text/uri-list:
+              schema:
+                type: string
+        "404":
+          description: Not Found
+    put:
+      tags:
+      - user-property-reference-controller
+      description: update-hypertension-by-user-Id
+      operationId: createPropertyReference-user-put_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelHypertension'
+        "201":
+          description: Created
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelHypertension'
+        "204":
+          description: No Content
+    delete:
+      tags:
+      - user-property-reference-controller
+      description: delete-hypertension-by-user-Id
+      operationId: deletePropertyReference-user-delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+    patch:
+      tags:
+      - user-property-reference-controller
+      description: patch-hypertension-by-user-Id
+      operationId: createPropertyReference-user-patch_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          application/x-spring-data-compact+json:
+            schema:
+              $ref: '#/components/schemas/CollectionModelObject'
+          text/uri-list:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelHypertension'
+        "204":
+          description: No Content
+  /users/{id}/hypertensions/{propertyId}:
+    get:
+      tags:
+      - user-property-reference-controller
+      description: get-hypertension-by-user-Id
+      operationId: followPropertyReference-user-get_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelHypertension'
+        "404":
+          description: Not Found
+    delete:
+      tags:
+      - user-property-reference-controller
+      description: delete-hypertension-by-user-Id
+      operationId: deletePropertyReferenceId-user-delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: propertyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+  /api/v1/hypertensions/{id}:
+    get:
+      tags:
+      - Hypertension
+      summary: Get a hypertension by id
+      description: "Get a Hypertension object by specifying its id. The response is\
+        \ Hypertension object with id, systolic and diastolic fields in the response\
+        \ body."
+      operationId: findById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/HypertensionDTO'
+      security:
+      - bearer-authentication: []
+    put:
+      tags:
+      - Hypertension
+      summary: Update a hypertension by id
+      description: Update a Hypertension object by specifying its id and sending object
+        with systolic and diastolic fields in the request body.
+      operationId: update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HypertensionDTO'
+        required: true
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "204":
+          description: No Content
+      security:
+      - bearer-authentication: []
+    delete:
+      tags:
+      - Hypertension
+      summary: Delete a hypertension by id
+      description: Delete a Hypertension object by specifying its id.
+      operationId: delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "204":
+          description: No Content
+      security:
+      - bearer-authentication: []
+  /api/v1/body-mass-indices/{id}:
+    get:
+      tags:
+      - Body Mass Index
+      summary: Get a body mass index by id
+      description: "Get a BodyMassIndex object by specifying its id. The response\
+        \ is BodyMassIndex object with id, height, weight, age, gender and bmi value."
+      operationId: findById_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/BodyMassIndexDTO'
+      security:
+      - google-oauth2: []
+    put:
+      tags:
+      - Body Mass Index
+      summary: Update a body mass index by id
+      description: "Update a BodyMassIndex object by specifying its id and sending\
+        \ object with height, weight, age and gender in the request body."
+      operationId: update_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyMassIndexDTO'
+        required: true
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "204":
+          description: No Content
+      security:
+      - google-oauth2: []
+    delete:
+      tags:
+      - Body Mass Index
+      summary: Delete a body mass index by id
+      description: Delete a BodyMassIndex object by specifying its id.
+      operationId: delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "204":
+          description: No Content
+      security:
+      - google-oauth2: []
+  /api/v1/refresh-token:
+    post:
+      tags:
+      - Refresh Token
+      summary: Refresh token when expired
+      description: Refresh the token when date expired by sending refresh token in
+        the request body.
+      operationId: refreshToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenDTO'
+        required: true
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AuthDTO'
+  /api/v1/login:
+    post:
+      tags:
+      - Login
+      summary: Login into an application
+      description: Login into an application by sending access token in authorization
+        bearer header.
+      operationId: login
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AuthDTO'
+  /api/v1/hypertensions:
+    get:
+      tags:
+      - Hypertension
+      summary: Get a set of hypertensions
+      description: "Get a set of Hypertension objects. The response is set of Hypertension\
+        \ objects with id, systolic and diastolic fields in the response body."
+      operationId: findAllForCurrentUser
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/HypertensionDTO'
+      security:
+      - bearer-authentication: []
+    post:
+      tags:
+      - Hypertension
+      summary: Create a hypertension
+      description: Create a Hypertension object by sending object with systolic and
+        diastolic fields in the request body.
+      operationId: save
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HypertensionDTO'
+        required: true
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "201":
+          description: Created
+      security:
+      - bearer-authentication: []
+  /api/v1/body-mass-indices:
+    get:
+      tags:
+      - Body Mass Index
+      summary: Get a set of body mass indices
+      description: "Get a set of BodyMassIndex objects. The response is set of BodyMassIndex\
+        \ objects with id, height, weight, age, gender and bmi value."
+      operationId: findAllForCurrentUser_1
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "200":
+          description: OK
+          content:
+            application/hal+json:
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/BodyMassIndexDTO'
+      security:
+      - google-oauth2: []
+    post:
+      tags:
+      - Body Mass Index
+      summary: Create a body mass index
+      description: "Create a BodyMassIndex object by sending object with height, weight,\
+        \ age and gender in the request body."
+      operationId: save_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyMassIndexDTO'
+        required: true
+      responses:
+        "403":
+          description: Forbidden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "404":
+          description: Not Found
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "201":
+          description: Created
+      security:
+      - google-oauth2: []
+components:
+  schemas:
+    Problem:
+      type: object
+      properties:
+        instance:
+          type: string
+          format: uri
+        type:
+          type: string
+          format: uri
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        title:
+          type: string
+        detail:
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusType'
+    StatusType:
+      type: object
+      properties:
+        reasonPhrase:
+          type: string
+        statusCode:
+          type: integer
+          format: int32
+    AbstractJsonSchemaPropertyObject:
+      type: object
+      properties:
+        title:
+          type: string
+        readOnly:
+          type: boolean
+    Item:
+      type: object
+      properties:
+        type:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AbstractJsonSchemaPropertyObject'
+        requiredProperties:
+          type: array
+          items:
+            type: string
+    JsonSchema:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AbstractJsonSchemaPropertyObject'
+        requiredProperties:
+          type: array
+          items:
+            type: string
+        definitions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Item'
+        type:
+          type: string
+        $schema:
+          type: string
+    Links:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Link'
+    RepresentationModelObject:
+      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/Links'
+    BodyMassIndex:
+      required:
+      - age
+      - createdAt
+      - gender
+      - height
+      - modifiedAt
+      - value
+      - weight
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        height:
+          type: number
+          format: double
+        weight:
+          type: number
+          format: double
+        age:
+          type: integer
+          format: int32
+        gender:
+          type: string
+          enum:
+          - FEMALE
+          - MALE
+        value:
+          type: number
+          format: double
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    EntityModelRefreshToken:
+      type: object
+      properties:
+        token:
+          type: string
+          format: uuid
+        expiryDate:
+          type: string
+          format: date-time
+        _links:
+          $ref: '#/components/schemas/Links'
+    GrantedAuthority:
+      type: object
+      properties:
+        authority:
+          type: string
+    Hypertension:
+      required:
+      - createdAt
+      - modifiedAt
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        systolic:
+          type: integer
+          format: int32
+        diastolic:
+          type: integer
+          format: int32
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    User:
+      required:
+      - createdAt
+      - email
+      - firstName
+      - lastName
+      - modifiedAt
+      - role
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+          - ADMIN
+          - USER
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+        bodyMassIndices:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/BodyMassIndex'
+        hypertensions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Hypertension'
+        password:
+          type: string
+        enabled:
+          type: boolean
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        credentialsNonExpired:
+          type: boolean
+        username:
+          type: string
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantedAuthority'
+    PageMetadata:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int64
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+    PagedModelEntityModelRefreshToken:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            refreshTokens:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelRefreshToken'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    EntityModelUser:
+      required:
+      - createdAt
+      - email
+      - firstName
+      - lastName
+      - modifiedAt
+      - role
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+          - ADMIN
+          - USER
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+        password:
+          type: string
+        enabled:
+          type: boolean
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        credentialsNonExpired:
+          type: boolean
+        username:
+          type: string
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantedAuthority'
+        _links:
+          $ref: '#/components/schemas/Links'
+    CollectionModelObject:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            objects:
+              type: array
+              items:
+                type: object
+        _links:
+          $ref: '#/components/schemas/Links'
+    EntityModelHypertension:
+      required:
+      - createdAt
+      - modifiedAt
+      type: object
+      properties:
+        systolic:
+          type: integer
+          format: int32
+        diastolic:
+          type: integer
+          format: int32
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+        _links:
+          $ref: '#/components/schemas/Links'
+    PagedModelEntityModelHypertension:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            hypertensions:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelHypertension'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    EntityModelBodyMassIndex:
+      required:
+      - age
+      - createdAt
+      - gender
+      - height
+      - modifiedAt
+      - value
+      - weight
+      type: object
+      properties:
+        height:
+          type: number
+          format: double
+        weight:
+          type: number
+          format: double
+        age:
+          type: integer
+          format: int32
+        gender:
+          type: string
+          enum:
+          - FEMALE
+          - MALE
+        value:
+          type: number
+          format: double
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+        _links:
+          $ref: '#/components/schemas/Links'
+    PagedModelEntityModelBodyMassIndex:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            bodyMassIndexes:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelBodyMassIndex'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    PagedModelEntityModelUser:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                $ref: '#/components/schemas/EntityModelUser'
+        _links:
+          $ref: '#/components/schemas/Links'
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+    CollectionModelHypertension:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            hypertensions:
+              type: array
+              items:
+                $ref: '#/components/schemas/HypertensionResponse'
+        _links:
+          $ref: '#/components/schemas/Links'
+    CollectionModelBodyMassIndex:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            bodyMassIndexes:
+              type: array
+              items:
+                $ref: '#/components/schemas/BodyMassIndexResponse'
+        _links:
+          $ref: '#/components/schemas/Links'
+    BodyMassIndexRequestBody:
+      required:
+      - age
+      - createdAt
+      - gender
+      - height
+      - modifiedAt
+      - value
+      - weight
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        height:
+          type: number
+          format: double
+        weight:
+          type: number
+          format: double
+        age:
+          type: integer
+          format: int32
+        gender:
+          type: string
+          enum:
+          - FEMALE
+          - MALE
+        value:
+          type: number
+          format: double
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    HypertensionRequestBody:
+      required:
+      - createdAt
+      - modifiedAt
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        systolic:
+          type: integer
+          format: int32
+        diastolic:
+          type: integer
+          format: int32
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    RefreshTokenRequestBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user:
+          type: string
+        token:
+          type: string
+          format: uuid
+        expiryDate:
+          type: string
+          format: date-time
+    UserRequestBody:
+      required:
+      - createdAt
+      - email
+      - firstName
+      - lastName
+      - modifiedAt
+      - role
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+          - ADMIN
+          - USER
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+        bodyMassIndices:
+          type: array
+          items:
+            type: string
+        hypertensions:
+          type: array
+          items:
+            type: string
+        password:
+          type: string
+        enabled:
+          type: boolean
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        credentialsNonExpired:
+          type: boolean
+        username:
+          type: string
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantedAuthority'
+    BodyMassIndexResponse:
+      required:
+      - age
+      - createdAt
+      - gender
+      - height
+      - modifiedAt
+      - value
+      - weight
+      type: object
+      properties:
+        height:
+          type: number
+          format: double
+        weight:
+          type: number
+          format: double
+        age:
+          type: integer
+          format: int32
+        gender:
+          type: string
+          enum:
+          - FEMALE
+          - MALE
+        value:
+          type: number
+          format: double
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    HypertensionResponse:
+      required:
+      - createdAt
+      - modifiedAt
+      type: object
+      properties:
+        systolic:
+          type: integer
+          format: int32
+        diastolic:
+          type: integer
+          format: int32
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    HypertensionDTO:
+      required:
+      - diastolic
+      - systolic
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        systolic:
+          type: integer
+          format: int32
+        diastolic:
+          type: integer
+          format: int32
+    BodyMassIndexDTO:
+      required:
+      - age
+      - gender
+      - height
+      - weight
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        height:
+          type: number
+          format: double
+        weight:
+          type: number
+          format: double
+        age:
+          type: integer
+          format: int32
+        gender:
+          type: string
+        value:
+          type: number
+          format: double
+    RefreshTokenDTO:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+    AuthDTO:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        userId:
+          type: integer
+          format: int64
+        role:
+          type: string
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        hreflang:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
+        templated:
+          type: boolean
+  securitySchemes:
+    basicScheme:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

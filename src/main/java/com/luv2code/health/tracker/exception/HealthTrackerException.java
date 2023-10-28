@@ -9,15 +9,32 @@ import java.util.Map;
 
 public class HealthTrackerException extends AbstractThrowableProblem {
 
-    public HealthTrackerException(StatusType statusType,
-                                  Exception exception,
-                                  HttpServletRequest httpServletRequest,
-                                  Map<String, Object> parameters) {
+    public HealthTrackerException(
+            StatusType statusType,
+            String message,
+            HttpServletRequest httpServletRequest,
+            Map<String, Object> parameters
+    ) {
         super(
                 URI.create(httpServletRequest.getRequestURI()),
                 statusType.getReasonPhrase(),
                 statusType,
-                exception.getMessage(),
+                message,
+                null,
+                null,
+                parameters
+        );
+    }
+    public HealthTrackerException(
+            StatusType statusType,
+            String message,
+            Map<String, Object> parameters
+    ) {
+        super(
+                null,
+                null,
+                statusType,
+                message,
                 null,
                 null,
                 parameters

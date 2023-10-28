@@ -1,21 +1,32 @@
 spring:
-    datasource:
-        url: jdbc:postgresql://localhost:5687/health-tracker
-        driver-class-name: org.postgresql.Driver
-        username: postgres
-        password: password
-    jpa:
-        properties:
-            hibernate:
-                dialect: org.hibernate.dialect.PostgreSQLDialect
-        hibernate:
-            ddl-auto: update
-    flyway:
-        baseline-on-migrate: true
-        locations: classpath:db/migration
-        sql-migration-prefix: V_
-        sql-migration-separator: _
-        sql-migration-suffixes: .sql
-        encoding: UTF-8
-        validate-on-migrate: true
-        validate-migration-naming: true
+  datasource:
+    url: jdbc:postgresql://localhost:5687/health-tracker
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+  flyway:
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    sql-migration-prefix: V_
+    sql-migration-separator: _
+    sql-migration-suffixes: .sql
+    encoding: UTF-8
+    validate-on-migrate: true
+    validate-migration-naming: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: 'https://www.googleapis.com/oauth2/v3/certs'
+com:
+  luv2code:
+    health:
+      tracker:
+        token:
+          secret: '404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970'

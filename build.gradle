@@ -1,15 +1,21 @@
 buildscript {
     ext {
-        springBootVersion = "3.0.5"
+        springBootVersion = "3.1.2"
         springDependencyManagementVerison = "1.1.0"
-        springWebfluxVerion = "6.0.7"
-
-        flywayVersion = "9.16.1"
+        springBootStarterValidation = "3.1.1"
+        springWebfluxVerion = "6.0.11"
+        springOAuth2ResourceServerVersion = "3.1.1"
 
         zalandoProblemVersion = "0.29.1"
+        owaspVersion = "8.1.2"
+        flywayVersion = "9.16.1"
+        jsonwebtokenVersion = "0.11.5"
+        jaxbApiVersion = "2.3.1"
+        jakartaValidationVersion = "3.0.2"
+        thymeleafVersion = "3.1.1.RELEASE"
 
-        junitJupiterVersion = "5.9.2"
-        testcontainersVersion = "1.17.6"
+        junitJupiterVersion = "5.9.3"
+        testcontainersVersion = "1.18.3"
     }
 }
 
@@ -28,14 +34,6 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
-    testCompile {
-        exclude group: "junit", module: "junit"
-        exclude group: "org.junit.vintage", module: "junit-vintage-engine"
-    }
-    testRuntime {
-        exclude group: "junit", module: "junit"
-        exclude group: "org.junit.vintage", module: "junit-vintage-engine"
-    }
 }
 
 repositories {
@@ -48,11 +46,16 @@ test {
 
 dependencies {
     // Spring
-    implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
-    implementation "org.springframework.boot:spring-boot-starter-aop"
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "org.springframework.boot:spring-boot-starter-data-rest"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework:spring-webflux:$springWebfluxVerion"
+    implementation "org.springframework.boot:spring-boot-starter-validation:$springBootStarterValidation"
+    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server:$springOAuth2ResourceServerVersion"
+    implementation "org.springframework:spring-webflux:$springWebfluxVerion"
+
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
 
     // Flyway
     implementation "org.flywaydb:flyway-core:$flywayVersion"
@@ -61,6 +64,17 @@ dependencies {
     implementation "org.zalando:problem-spring-web-starter:$zalandoProblemVersion"
     implementation "org.zalando:problem-spring-web:$zalandoProblemVersion"
 
+    // Jakarta Validation
+    implementation "jakarta.validation:jakarta.validation-api:$jakartaValidationVersion"
+
+    // Jwt
+    implementation "io.jsonwebtoken:jjwt-api:$jsonwebtokenVersion"
+    implementation "io.jsonwebtoken:jjwt-impl:$jsonwebtokenVersion"
+    implementation "io.jsonwebtoken:jjwt-jackson:$jsonwebtokenVersion"
+
+    // JAXB
+    implementation "javax.xml.bind:jaxb-api:$jaxbApiVersion"
+
     compileOnly "org.projectlombok:lombok"
 
     runtimeOnly "org.postgresql:postgresql"
@@ -68,10 +82,11 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.springframework.boot:spring-boot-testcontainers"
+    testImplementation "org.springframework.security:spring-security-test"
+    testImplementation "org.testcontainers:testcontainers:$testcontainersVersion"
     testImplementation "org.testcontainers:junit-jupiter:$testcontainersVersion"
     testImplementation "org.testcontainers:postgresql:$testcontainersVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion"
 
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
 }
