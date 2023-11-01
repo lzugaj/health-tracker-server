@@ -60,6 +60,7 @@ public class UserTest {
         assertEquals(LocalDateTime.parse("2025-02-24T08:23:45"), user.getCreatedAt());
         assertEquals(LocalDateTime.parse("2025-02-24T08:23:45"), user.getModifiedAt());
         assertEquals(0, user.getBodyMassIndices().size());
+        assertEquals(0, user.getHypertensions().size());
     }
 
     @Test

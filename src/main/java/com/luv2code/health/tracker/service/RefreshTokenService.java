@@ -29,6 +29,7 @@ public class RefreshTokenService {
     private final TokenProperties tokenProperties;
     private final RefreshTokenMapper refreshTokenMapper;
 
+    @Transactional
     public RefreshToken create(User user) {
         RefreshToken refreshToken = refreshTokenMapper.toEntity(user);
         return refreshTokenRepository.save(refreshToken);

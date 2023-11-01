@@ -39,6 +39,7 @@ public class SecurityConfig {
                                 "/v3/api-docs",
                                 "/v3/api-docs/**",
                                 "/v3/api-docs.yaml",
+                                "/v3/api-docs.yaml",
                                 "/swagger-ui/**",
                                 "/actuator/**"
                         )

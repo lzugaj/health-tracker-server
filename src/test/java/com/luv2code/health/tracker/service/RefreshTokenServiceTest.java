@@ -7,6 +7,8 @@ import com.luv2code.health.tracker.properties.TokenProperties;
 import com.luv2code.health.tracker.repository.RefreshTokenRepository;
 import com.luv2code.health.tracker.rest.dto.AuthDTO;
 import com.luv2code.health.tracker.rest.mapper.RefreshTokenMapper;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,6 +22,7 @@ import java.util.UUID;
 
 import static com.luv2code.health.tracker.data.RefreshTokenData.createRefreshToken;
 import static com.luv2code.health.tracker.data.UserTestData.createUser;
+import static com.luv2code.health.tracker.util.ClockUtil.resetClock;
 import static com.luv2code.health.tracker.util.ClockUtil.useFixedClockAt;
 import static java.time.Instant.parse;
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,6 +47,19 @@ public class RefreshTokenServiceTest {
     private RefreshTokenService refreshTokenService;
 
     private static final String SECRET_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
+
+    /*@BeforeEach
+    public void setUp() {
+        // Set a fixed clock for testing
+        Instant fixedInstant = parse("2022-02-24T08:23:45Z");
+        useFixedClockAt(fixedInstant);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        // Reset the clock to the system default after the test
+        resetClock();
+    }*/
 
     @Test
     public void user_create_returnNewRefreshToken() {
@@ -93,17 +109,12 @@ public class RefreshTokenServiceTest {
 
     @Test
     public void refreshTokenUUIDIsExpired_findByToken_returnNewAuthDTO() {
-        //Instant fixedInstant = parse("2024-02-24T08:23:45Z");
-        //useFixedClockAt(fixedInstant);
-
         User user = createUser("John", "Doe", "john.doe@gmail.com");
         RefreshToken refreshToken = createRefreshToken(user);
 
         when(refreshTokenRepository.findByToken(refreshToken.getToken())).thenReturn(Optional.of(refreshToken));
+        when(customUserDetailsService.loadUserByUsername(user.getEmail())).thenReturn(user);
         when(refreshTokenMapper.toEntity(user)).thenReturn(refreshToken);
-
-        //verify(refreshTokenRepository, times(1)).delete(refreshToken);
-        //verify(refreshTokenRepository, times(1)).save(refreshToken);
 
         AuthDTO authDTO = refreshTokenService.findByToken(refreshToken.getToken());
 

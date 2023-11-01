@@ -13,6 +13,7 @@ buildscript {
         jaxbApiVersion = "2.3.1"
         jakartaValidationVersion = "3.0.2"
         thymeleafVersion = "3.1.1.RELEASE"
+        springdocOpenapiStarterWebmvcUiVersion = "2.2.0"
 
         junitJupiterVersion = "5.9.3"
         testcontainersVersion = "1.18.3"
@@ -55,8 +56,6 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server:$springOAuth2ResourceServerVersion"
     implementation "org.springframework:spring-webflux:$springWebfluxVerion"
 
-    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
-
     // Flyway
     implementation "org.flywaydb:flyway-core:$flywayVersion"
 
@@ -74,6 +73,9 @@ dependencies {
 
     // JAXB
     implementation "javax.xml.bind:jaxb-api:$jaxbApiVersion"
+
+    // OpenAPI 3
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenapiStarterWebmvcUiVersion"
 
     compileOnly "org.projectlombok:lombok"
 

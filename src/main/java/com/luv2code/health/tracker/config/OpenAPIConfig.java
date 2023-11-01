@@ -22,8 +22,8 @@ public class OpenAPIConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .components(new Components().addSecuritySchemes("basicScheme",
-                        new SecurityScheme().type(HTTP).scheme("bearer").name("bearer-authentication").bearerFormat("JWT").in(HEADER)))
+                /*.components(new Components().addSecuritySchemes("basicScheme",
+                        new SecurityScheme().type(HTTP).scheme("bearer").name("bearer-authentication").bearerFormat("JWT").in(HEADER)))*/
                 .info(info())
                 .servers(List.of(
                         new Server().url("http://localhost:8080")

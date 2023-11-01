@@ -28,7 +28,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/hypertensions")
 @Tag(name = "Hypertension", description = "Hypertension API")
-@SecurityRequirement(name = "bearer-authentication")
+//@SecurityRequirement(name = "bearer-authentication")
 public class HypertensionController {
     
     private final HypertensionService hypertensionService;

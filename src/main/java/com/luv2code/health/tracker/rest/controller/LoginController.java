@@ -2,6 +2,7 @@ package com.luv2code.health.tracker.rest.controller;
 
 import com.luv2code.health.tracker.domain.User;
 import com.luv2code.health.tracker.domain.body_mass_index.BodyMassIndex;
+import com.luv2code.health.tracker.exception.HealthTrackerException;
 import com.luv2code.health.tracker.rest.dto.AuthDTO;
 import com.luv2code.health.tracker.rest.mapper.UserMapper;
 import com.luv2code.health.tracker.service.UserService;

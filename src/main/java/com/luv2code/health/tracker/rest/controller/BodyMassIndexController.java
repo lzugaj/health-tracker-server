@@ -31,7 +31,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/body-mass-indices")
 @Tag(name = "Body Mass Index", description = "Body mass index API")
-@SecurityRequirement(name = "google-oauth2")
+//@SecurityRequirement(name = "google-oauth2")
 public class BodyMassIndexController {
 
     private final BodyMassIndexService bodyMassIndexService;
