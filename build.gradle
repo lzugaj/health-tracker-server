@@ -6,14 +6,15 @@ buildscript {
         springWebfluxVerion = "6.0.11"
         springOAuth2ResourceServerVersion = "3.1.1"
 
+        hypersistenceUtilsHibernateVersion = "3.6.0"
         zalandoProblemVersion = "0.29.1"
         owaspVersion = "8.1.2"
         flywayVersion = "9.16.1"
         jsonwebtokenVersion = "0.11.5"
         jaxbApiVersion = "2.3.1"
         jakartaValidationVersion = "3.0.2"
-        thymeleafVersion = "3.1.1.RELEASE"
         springdocOpenapiStarterWebmvcUiVersion = "2.2.0"
+        datasourceProxySpringBootStarterVersion = "1.9.0"
 
         junitJupiterVersion = "5.9.3"
         testcontainersVersion = "1.18.3"
@@ -29,7 +30,10 @@ plugins {
 
 group = "com.luv2code"
 version = "0.0.1-SNAPSHOT"
-sourceCompatibility = "17"
+
+java {
+    sourceCompatibility = "20"
+}
 
 configurations {
     compileOnly {
@@ -54,7 +58,9 @@ dependencies {
     implementation "org.springframework:spring-webflux:$springWebfluxVerion"
     implementation "org.springframework.boot:spring-boot-starter-validation:$springBootStarterValidation"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server:$springOAuth2ResourceServerVersion"
-    implementation "org.springframework:spring-webflux:$springWebfluxVerion"
+
+    // Hibernate
+    implementation "io.hypersistence:hypersistence-utils-hibernate-62:$hypersistenceUtilsHibernateVersion"
 
     // Flyway
     implementation "org.flywaydb:flyway-core:$flywayVersion"
@@ -73,6 +79,9 @@ dependencies {
 
     // JAXB
     implementation "javax.xml.bind:jaxb-api:$jaxbApiVersion"
+
+    // Datasource Proxy Spring Boot Starter
+    implementation "com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:$datasourceProxySpringBootStarterVersion"
 
     // OpenAPI 3
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenapiStarterWebmvcUiVersion"

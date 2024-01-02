@@ -13,9 +13,8 @@ import static com.luv2code.health.tracker.domain.enums.Gender.FEMALE;
 import static com.luv2code.health.tracker.domain.enums.Gender.MALE;
 
 @Component
-public class BodyMassIndexMapper implements HealthTrackerMapper<BodyMassIndex, BodyMassIndexDTO> {
+public class BodyMassIndexMapper {
 
-    @Override
     public BodyMassIndex toEntity(BodyMassIndexDTO dto) {
         Objects.requireNonNull(dto, "Given dto is null.");
 
@@ -37,7 +36,6 @@ public class BodyMassIndexMapper implements HealthTrackerMapper<BodyMassIndex, B
         }
     }
 
-    @Override
     public BodyMassIndexDTO toDto(BodyMassIndex entity) {
         Objects.requireNonNull(entity, "Given entity is null.");
         

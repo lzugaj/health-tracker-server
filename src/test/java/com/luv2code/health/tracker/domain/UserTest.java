@@ -1,7 +1,6 @@
 package com.luv2code.health.tracker.domain;
 
 import com.luv2code.health.tracker.data.AdultBodyMassIndexTestData;
-import com.luv2code.health.tracker.data.HypertensionData;
 import com.luv2code.health.tracker.domain.body_mass_index.BodyMassIndex;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,7 +57,6 @@ public class UserTest {
         assertEquals("john.wick4@gmail.com", user.getEmail());
         assertEquals(USER, user.getRole());
         assertEquals(LocalDateTime.parse("2025-02-24T08:23:45"), user.getCreatedAt());
-        assertEquals(LocalDateTime.parse("2025-02-24T08:23:45"), user.getModifiedAt());
         assertEquals(0, user.getBodyMassIndices().size());
         assertEquals(0, user.getHypertensions().size());
     }

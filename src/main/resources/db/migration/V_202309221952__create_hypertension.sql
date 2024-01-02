@@ -6,7 +6,9 @@ create table if not exists "hypertension" (
     diastolic integer not null,
     user_id bigint not null,
     created_at timestamp not null,
-    modified_at timestamp not null,
+    last_modified_at timestamp,
+    created_by int not null,
+    last_modified_by int,
     primary key (id)
 );
 

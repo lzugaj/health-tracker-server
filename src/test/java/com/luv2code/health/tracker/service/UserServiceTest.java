@@ -78,7 +78,7 @@ public class UserServiceTest {
         assertEquals(refreshToken.getToken(), UUID.fromString(buildedAuthDTO.refreshToken()));
         assertEquals(searchedUser.getRole().name(), buildedAuthDTO.role());
 
-        verify(userRepository, times(1)).save(searchedUser);
+        verify(userRepository, times(1)).persist(searchedUser);
     }
 
     @Test

@@ -2,35 +2,13 @@ package com.luv2code.health.tracker.domain;
 
 import com.luv2code.health.tracker.domain.body_mass_index.BodyMassIndex;
 import com.luv2code.health.tracker.exception.LowerThanOrEqualsZeroException;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
 
 import static com.luv2code.health.tracker.data.AdultBodyMassIndexTestData.createAdultBodyMassIndex;
 import static com.luv2code.health.tracker.domain.enums.Gender.MALE;
-import static com.luv2code.health.tracker.util.ClockUtil.resetClock;
-import static com.luv2code.health.tracker.util.ClockUtil.useFixedClockAt;
-import static java.time.Instant.parse;
-import static java.time.LocalDateTime.now;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BodyMassIndexTest {
-
-    @BeforeEach
-    public void setUp() {
-        // Set a fixed clock for testing
-        Instant fixedInstant = parse("2024-02-24T08:23:45Z");
-        useFixedClockAt(fixedInstant);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        // Reset the clock to the system default after the test
-        resetClock();
-    }
 
     @Test
     public void givenHeightLowerThenZero_whenBuildingEntity_thenThrowNullPointerException() {
@@ -77,8 +55,6 @@ public class BodyMassIndexTest {
         assertEquals(188.00, newBodyMassIndex.getHeight());
         assertEquals(82.34, newBodyMassIndex.getWeight());
         assertEquals(23.3, newBodyMassIndex.getValue());
-        assertEquals(LocalDateTime.parse("2024-02-24T08:23:45"), newBodyMassIndex.getCreatedAt());
-        assertEquals(LocalDateTime.parse("2024-02-24T08:23:45"), newBodyMassIndex.getModifiedAt());
     }
 
     @Test
@@ -91,6 +67,5 @@ public class BodyMassIndexTest {
         assertEquals(188.0, bodyMassIndex.getHeight());
         assertEquals(90.2, bodyMassIndex.getWeight());
         assertEquals(25.52, bodyMassIndex.getValue());
-        assertEquals(LocalDateTime.parse("2024-02-24T08:23:45"), updatedBodyMassIndex.getModifiedAt());
     }
 }

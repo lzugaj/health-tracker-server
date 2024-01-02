@@ -1,5 +1,6 @@
 package com.luv2code.health.tracker.rest.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -9,7 +10,7 @@ public record BodyMassIndexDTO (
         @NotNull Double height,
         @NotNull Double weight,
         @NotNull Integer age,
-        @NotNull String gender,
+        @NotBlank String gender,
         Double value
 ) {
 

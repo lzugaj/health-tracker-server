@@ -1,24 +1,20 @@
 package com.luv2code.health.tracker.rest.controller;
 
 import com.luv2code.health.tracker.domain.User;
-import com.luv2code.health.tracker.domain.body_mass_index.BodyMassIndex;
-import com.luv2code.health.tracker.exception.HealthTrackerException;
 import com.luv2code.health.tracker.rest.dto.AuthDTO;
 import com.luv2code.health.tracker.rest.mapper.UserMapper;
 import com.luv2code.health.tracker.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.http.HttpStatus.OK;
-
+@Validated
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor

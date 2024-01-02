@@ -32,13 +32,13 @@ public class RefreshTokenService {
     @Transactional
     public RefreshToken create(User user) {
         RefreshToken refreshToken = refreshTokenMapper.toEntity(user);
-        return refreshTokenRepository.save(refreshToken);
+        return refreshTokenRepository.persist(refreshToken);
     }
 
     @Transactional
     public AuthDTO findByToken(UUID refreshToken) {
         RefreshToken searchedRefreshToken = refreshTokenRepository.findByToken(refreshToken)
-                .orElseThrow(() -> new RefreshTokenException("Refresh token is not founded in database."));
+                .orElseThrow(() -> new RefreshTokenException("Refresh token is not found in database."));
 
         refreshToken = checkTokenExpirationDate(refreshToken, searchedRefreshToken);
         return buildAuthDTO(searchedRefreshToken.getUser(), refreshToken);
@@ -47,7 +47,7 @@ public class RefreshTokenService {
     @Transactional
     public AuthDTO findByUser(User user) {
         RefreshToken searchedRefreshToken = refreshTokenRepository.findByUser(user)
-                .orElseThrow(() -> new RefreshTokenException("Refresh token is not founded in database."));
+                .orElseThrow(() -> new RefreshTokenException("Refresh token is not found in database."));
 
         UUID refreshToken = searchedRefreshToken.getToken();
         refreshToken = checkTokenExpirationDate(refreshToken, searchedRefreshToken);

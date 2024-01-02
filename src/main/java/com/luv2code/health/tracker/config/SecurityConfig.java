@@ -16,7 +16,8 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.luv2code.health.tracker.constants.SecurityConstants.*;
+import static com.luv2code.health.tracker.constants.SecurityConstants.LOGIN_ENDPOINT;
+import static com.luv2code.health.tracker.constants.SecurityConstants.REFRESH_TOKEN_ENDPOINT;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -41,9 +42,8 @@ public class SecurityConfig {
                                 "/v3/api-docs.yaml",
                                 "/v3/api-docs.yaml",
                                 "/swagger-ui/**",
-                                "/actuator/**"
-                        )
-                        .permitAll()
+                                "/actuator/**")
+                            .permitAll()
                 )
                 .build();
     }

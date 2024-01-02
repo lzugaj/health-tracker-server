@@ -2,10 +2,8 @@ package com.luv2code.health.tracker.domain;
 
 import com.luv2code.health.tracker.domain.body_mass_index.BodyMassIndex;
 import com.luv2code.health.tracker.domain.enums.Role;
-import com.luv2code.health.tracker.util.ClockUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +11,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.Clock;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.luv2code.health.tracker.domain.enums.Role.USER;
 import static com.luv2code.health.tracker.util.ClockUtil.getClock;
@@ -66,8 +65,7 @@ public class User implements UserDetails {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @NotNull
-    @Column(name = "modified_at", nullable = false)
+    @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
 
     @OneToMany(
@@ -91,7 +89,6 @@ public class User implements UserDetails {
         this.email = requireNonNull(email, "Email must be supplied.");
         this.role = USER;
         this.createdAt = now(getClock());
-        this.modifiedAt = now(getClock());
         this.bodyMassIndices = new HashSet<>();
         this.hypertensions = new HashSet<>();
     }

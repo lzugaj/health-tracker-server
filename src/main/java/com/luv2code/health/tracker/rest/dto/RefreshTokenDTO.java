@@ -1,8 +1,11 @@
 package com.luv2code.health.tracker.rest.dto;
 
-import lombok.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 
 @Builder
-public record RefreshTokenDTO (String refreshToken) {
+public record RefreshTokenDTO (
+        @NotBlank String refreshToken
+) {
 
 }

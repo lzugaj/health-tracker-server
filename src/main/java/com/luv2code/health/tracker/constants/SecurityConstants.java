@@ -7,6 +7,7 @@ public class SecurityConstants {
 
     public static final String BEARER_TOKEN_PREFIX = "Bearer ";
 
+    public static final String ACTUATOR_ENDPOINT = "/actuator/**";
     public static final String LOGIN_ENDPOINT = "/api/v1/login";
     public static final String REFRESH_TOKEN_ENDPOINT = "/api/v1/refresh-token";
 

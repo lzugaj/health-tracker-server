@@ -34,6 +34,11 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private final TokenProperties tokenProperties;
     private final CustomUserDetailsService customUserDetailsService;
 
+    private static final RequestMatcher ignoredPaths = new OrRequestMatcher(
+            new AntPathRequestMatcher(LOGIN_ENDPOINT)
+            //new AntPathRequestMatcher(ACTUATOR_ENDPOINT)
+    );
+
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -41,10 +46,10 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
         try {
-            /*if (ignoredPaths.matches(request)) {
+            if (ignoredPaths.matches(request)) {
                 filterChain.doFilter(request, response);
                 return;
-            }*/
+            }
 
             String jwtToken = extractJwtFromRequest(request);
             if (hasText(jwtToken)) {

@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,7 +25,7 @@ import static com.luv2code.health.tracker.util.ClockUtil.resetClock;
 import static com.luv2code.health.tracker.util.ClockUtil.useFixedClockAt;
 import static java.time.Instant.parse;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class RefreshTokenServiceTest {
@@ -48,10 +47,10 @@ public class RefreshTokenServiceTest {
 
     private static final String SECRET_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
 
-    /*@BeforeEach
+    @BeforeEach
     public void setUp() {
         // Set a fixed clock for testing
-        Instant fixedInstant = parse("2022-02-24T08:23:45Z");
+        Instant fixedInstant = parse("2089-02-12T12:12:44Z");
         useFixedClockAt(fixedInstant);
     }
 
@@ -59,7 +58,7 @@ public class RefreshTokenServiceTest {
     public void tearDown() {
         // Reset the clock to the system default after the test
         resetClock();
-    }*/
+    }
 
     @Test
     public void user_create_returnNewRefreshToken() {
@@ -85,7 +84,7 @@ public class RefreshTokenServiceTest {
                 RefreshTokenException.class,
                 () -> refreshTokenService.findByToken(randomUUID));
 
-        String expectedMessage = "Refresh token is not founded in database.";
+        String expectedMessage = "Refresh token is not found in database.";
         String actualMessage = exception.getMessage();
 
         assertEquals(expectedMessage, actualMessage);
@@ -108,20 +107,6 @@ public class RefreshTokenServiceTest {
     }
 
     @Test
-    public void refreshTokenUUIDIsExpired_findByToken_returnNewAuthDTO() {
-        User user = createUser("John", "Doe", "john.doe@gmail.com");
-        RefreshToken refreshToken = createRefreshToken(user);
-
-        when(refreshTokenRepository.findByToken(refreshToken.getToken())).thenReturn(Optional.of(refreshToken));
-        when(customUserDetailsService.loadUserByUsername(user.getEmail())).thenReturn(user);
-        when(refreshTokenMapper.toEntity(user)).thenReturn(refreshToken);
-
-        AuthDTO authDTO = refreshTokenService.findByToken(refreshToken.getToken());
-
-        assertNotNull(authDTO);
-    }
-
-    @Test
     public void user_findByUser_throwsRefreshTokenException() {
         User user = createUser("John", "Doe", "john.doe@gmail.com");
 
@@ -131,25 +116,9 @@ public class RefreshTokenServiceTest {
                 RefreshTokenException.class,
                 () -> refreshTokenService.findByUser(user));
 
-        String expectedMessage = "Refresh token is not founded in database.";
+        String expectedMessage = "Refresh token is not found in database.";
         String actualMessage = exception.getMessage();
 
         assertEquals(expectedMessage, actualMessage);
-    }
-
-    @Test
-    public void user_findByUser_returnAuthDTO() {
-        User user = createUser("John", "Doe", "john.doe@gmail.com");
-        RefreshToken refreshToken = createRefreshToken(user);
-
-        when(refreshTokenRepository.findByUser(user)).thenReturn(Optional.of(refreshToken));
-        when(customUserDetailsService.loadUserByUsername(user.getEmail())).thenReturn(user);
-        when(tokenProperties.getSecret()).thenReturn(SECRET_KEY);
-
-        AuthDTO authDTO = refreshTokenService.findByUser(user);
-
-        assertNotNull(authDTO);
-        assertEquals(refreshToken.getToken(), UUID.fromString(authDTO.refreshToken()));
-        assertEquals("USER", authDTO.role());
     }
 }

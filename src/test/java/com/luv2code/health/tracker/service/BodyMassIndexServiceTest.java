@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ import static com.luv2code.health.tracker.data.AdultBodyMassIndexTestData.create
 import static com.luv2code.health.tracker.data.UserTestData.createUser;
 import static com.luv2code.health.tracker.domain.enums.Gender.MALE;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class BodyMassIndexServiceTest {
@@ -33,7 +32,7 @@ public class BodyMassIndexServiceTest {
     public BodyMassIndexService bodyMassIndexService;
 
     @Test
-    public void givenBodyMassIndex_whenSave_thenAddIt() {
+    public void givenBodyMassIndex_whenSave_thenAddToUserList() {
         BodyMassIndex bodyMassIndex = createAdultBodyMassIndex(180.0, 75.4, 28, MALE);
         User currentUser = createUser("John", "Doe", "john.doe@gmail.com");
 
@@ -91,7 +90,7 @@ public class BodyMassIndexServiceTest {
     }
 
     @Test
-    public void givenBodyMassIndex_whenUpdate_ThenVerify() {
+    public void givenBodyMassIndex_whenUpdate_thenVerify() {
         BodyMassIndex updatedBodyMassIndex = createAdultBodyMassIndex(180.0, 75.4, 23, MALE);
 
         when(bodyMassIndexRepository.findById(updatedBodyMassIndex.getId())).thenReturn(Optional.of(updatedBodyMassIndex));
@@ -102,7 +101,7 @@ public class BodyMassIndexServiceTest {
     }
 
     @Test
-    public void givenBodyMassIndex_whenDelete_ThenVerify() {
+    public void givenBodyMassIndex_whenDelete_thenVerify() {
         Long bodyMassIndexId = 1L;
         User currentUser = createUser("John", "Doe", "john.doe@gmail.com");
         BodyMassIndex deletedBodyMassIndex = createAdultBodyMassIndex(180.0, 75.4, 56, MALE);

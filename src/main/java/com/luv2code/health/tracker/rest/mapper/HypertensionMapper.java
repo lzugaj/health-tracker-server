@@ -15,9 +15,8 @@ import static com.luv2code.health.tracker.domain.enums.Gender.FEMALE;
 import static com.luv2code.health.tracker.domain.enums.Gender.MALE;
 
 @Component
-public class HypertensionMapper implements HealthTrackerMapper<Hypertension, HypertensionDTO> {
+public class HypertensionMapper {
 
-    @Override
     public Hypertension toEntity(HypertensionDTO dto) {
         Objects.requireNonNull(dto, "Given dto is null.");
 
@@ -27,7 +26,6 @@ public class HypertensionMapper implements HealthTrackerMapper<Hypertension, Hyp
                 .build();
     }
 
-    @Override
     public HypertensionDTO toDto(Hypertension entity) {
         Objects.requireNonNull(entity, "Given entity is null.");
         

@@ -9,6 +9,8 @@ create table if not exists "body_mass_index" (
     gender text not null,
     body_mass_index_type text not null,
     created_at timestamp not null,
-    modified_at timestamp not null,
+    last_modified_at timestamp,
+    created_by int not null,
+    last_modified_by int,
     primary key (id)
 );

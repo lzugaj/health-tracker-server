@@ -7,6 +7,6 @@ create table if not exists "users" (
     email text not null,
     role text not null,
     created_at timestamp not null,
-    modified_at timestamp not null,
+    modified_at timestamp,
     primary key (id)
 );

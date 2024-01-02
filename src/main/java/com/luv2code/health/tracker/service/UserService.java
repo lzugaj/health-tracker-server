@@ -40,7 +40,7 @@ public class UserService {
     }
 
     private AuthDTO createNewUser(User newUser) {
-        userRepository.save(newUser);
+        userRepository.persist(newUser);
 
         String accessToken = generateToken(newUser, tokenProperties.getSecret());
         RefreshToken refreshToken = refreshTokenService.create(newUser);

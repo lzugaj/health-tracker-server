@@ -8,13 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Comparator;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toCollection;
 
 @Service
 @RequiredArgsConstructor
@@ -33,16 +28,12 @@ public class HypertensionService {
     public Hypertension findById(Long id) {
         return hypertensionRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Cannot found searched hypertension by id. [id=%d]", id)
+                        String.format("Cannot find searched Hypertension by given id. [id=%d]", id)
                 ));
     }
 
     public Set<Hypertension> findAllForCurrentUser() {
-        return userService.findCurrentLoggedInUser()
-                .getHypertensions()
-                .stream()
-                .sorted(comparing(Hypertension::getCreatedAt))
-                .collect(toCollection(LinkedHashSet::new));
+        return new HashSet<>(userService.findCurrentLoggedInUser().getHypertensions());
     }
 
     @Transactional

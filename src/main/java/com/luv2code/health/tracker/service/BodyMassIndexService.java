@@ -8,11 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
-
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toCollection;
 
 @Service
 @RequiredArgsConstructor
@@ -35,11 +32,7 @@ public class BodyMassIndexService {
     }
 
     public Set<BodyMassIndex> findAllForCurrentUser() {
-        return userService.findCurrentLoggedInUser()
-                .getBodyMassIndices()
-                .stream()
-                .sorted(comparing(BodyMassIndex::getCreatedAt))
-                .collect(toCollection(LinkedHashSet::new));
+        return new HashSet<>(userService.findCurrentLoggedInUser().getBodyMassIndices());
     }
 
     @Transactional
